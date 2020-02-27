@@ -13,4 +13,8 @@ public class Food extends AbstractItem {
         super(name, BasicTaxPolicy.EXEMPTED);
     }
 
+    public Food(String name, boolean imported, double shelfPrice) {
+        super(name, BasicTaxPolicy.EXEMPTED, imported, shelfPrice);
+    }
+
 }

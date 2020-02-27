@@ -14,4 +14,8 @@ public class MedicalProduct extends AbstractItem {
         super(name, BasicTaxPolicy.EXEMPTED);
     }
 
+    public MedicalProduct(String name, boolean imported, double shelfPrice) {
+        super(name, BasicTaxPolicy.EXEMPTED, imported, shelfPrice);
+    }
+
 }
