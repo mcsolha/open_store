@@ -2,10 +2,10 @@ package com.open.store.open_store;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.open.store.open_store.core.model.item.BasicTaxPolicy;
 import com.open.store.open_store.core.model.item.Book;
 import com.open.store.open_store.core.model.item.Food;
 import com.open.store.open_store.core.model.item.MedicalProduct;
+import com.open.store.open_store.core.model.tax.BasicTaxPolicy;
 
 import org.junit.jupiter.api.Test;
 

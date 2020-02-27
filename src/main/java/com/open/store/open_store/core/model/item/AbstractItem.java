@@ -1,5 +1,7 @@
 package com.open.store.open_store.core.model.item;
 
+import com.open.store.open_store.core.model.tax.BasicTaxPolicy;
+
 /**
  * Abstract class that represents what any type of product
  * will contain as properties
