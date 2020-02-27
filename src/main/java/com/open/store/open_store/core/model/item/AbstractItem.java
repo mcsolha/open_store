@@ -1,5 +1,8 @@
 package com.open.store.open_store.core.model.item;
 
+import com.open.store.open_store.core.exception.InvalidBasicTaxPolicyException;
+import com.open.store.open_store.core.exception.InvalidNameException;
+import com.open.store.open_store.core.exception.InvalidShelfPriceException;
 import com.open.store.open_store.core.model.tax.BasicTaxPolicy;
 
 /**
@@ -25,6 +28,10 @@ public abstract class AbstractItem {
     }
 
     public void setShelfPrice(double shelfPrice) {
+        if (shelfPrice < 0) {
+            throw new InvalidShelfPriceException();
+        }
+
         this.shelfPrice = shelfPrice;
     }
 
@@ -45,6 +52,14 @@ public abstract class AbstractItem {
     }
 
     public AbstractItem(final String name, final BasicTaxPolicy basicTaxPolicy) {
+        if (name.length() == 0) {
+            throw new InvalidNameException();
+        }
+
+        if (basicTaxPolicy == null) {
+            throw new InvalidBasicTaxPolicyException();
+        }
+
         this.name = name;
         this.basicTaxPolicy = basicTaxPolicy;
     }
@@ -54,6 +69,6 @@ public abstract class AbstractItem {
         this.name = name;
         this.basicTaxPolicy = basicTaxPolicy;
         this.imported = imported;
-        this.shelfPrice = shelfPrice;
+        this.setShelfPrice(shelfPrice);
     }
 }
