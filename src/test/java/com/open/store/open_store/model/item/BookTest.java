@@ -3,7 +3,8 @@ package com.open.store.open_store.model.item;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.open.store.open_store.core.model.item.Book;
-import com.open.store.open_store.core.model.tax.BasicTaxPolicy;
+import com.open.store.open_store.core.model.tax.BasicTax;
+import com.open.store.open_store.core.service.tax.BasicTaxService;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,18 +14,17 @@ class BookTest {
      */
     @Test
     public void booksShouldBeExemptedFromBasicTax() {
-        Book neurocomic = new Book("Neurocomic");
-        Book harryPotter = new Book("Harry Potter and the Philosopher's Stone");
-        Book wildCards = new Book("Wild Cards");
+        BasicTax basicTax = new BasicTax(0.1);
+        BasicTaxService basicTaxService = new BasicTaxService(basicTax);
+        Book harryPotter = new Book("Harry Potter");
+        Book wildCards = new Book("Wild Cards", false, 31.75);
+        Book neurocomic = new Book("Neurocomic", true, 27.50);
 
-        assertEquals(BasicTaxPolicy.EXEMPTED, neurocomic.getBasicTaxPolicy(),
-                "The Neurocomic book should be exempted from basic tax");
-
-        assertEquals(BasicTaxPolicy.EXEMPTED, harryPotter.getBasicTaxPolicy(),
-                "The Harry Potter book should be exempted from basic tax");
-
-        assertEquals(BasicTaxPolicy.EXEMPTED, wildCards.getBasicTaxPolicy(),
-                "The Wild Cards book should be exempted from basic tax");
+        assertEquals(0, basicTaxService.getItemTaxValue(harryPotter),
+            "Books should be exempted from basic tax!");
+        assertEquals(0, basicTaxService.getItemTaxValue(wildCards),
+            "Books should be exempted from basic tax!");
+        assertEquals(0, basicTaxService.getItemTaxValue(neurocomic),
+            "Books should be exempted from basic tax!");
     }
-
 }

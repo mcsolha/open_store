@@ -3,7 +3,8 @@ package com.open.store.open_store.model.item;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.open.store.open_store.core.model.item.MedicalProduct;
-import com.open.store.open_store.core.model.tax.BasicTaxPolicy;
+import com.open.store.open_store.core.model.tax.BasicTax;
+import com.open.store.open_store.core.service.tax.BasicTaxService;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,15 +14,17 @@ public class MedicalProductTest {
      */
     @Test
     public void medicalProductsShouldBeExemptedFromBasicTax() {
-        MedicalProduct gauze = new MedicalProduct("Gauze");
-        MedicalProduct aspirin = new MedicalProduct("Aspirin");
+        BasicTax basicTax = new BasicTax(0.1);
+        BasicTaxService basicTaxService = new BasicTaxService(basicTax);
         MedicalProduct bandAid = new MedicalProduct("Band-Aid");
+        MedicalProduct gauze = new MedicalProduct("Gauze", false, 2.33);
+        MedicalProduct aspirin = new MedicalProduct("Aspirin", true, 5.47);
 
-        assertEquals(BasicTaxPolicy.EXEMPTED, gauze.getBasicTaxPolicy(), "Gauze should be exempted from basic tax");
-
-        assertEquals(BasicTaxPolicy.EXEMPTED, aspirin.getBasicTaxPolicy(), "Aspirin should be exempted from basic tax");
-
-        assertEquals(BasicTaxPolicy.EXEMPTED, bandAid.getBasicTaxPolicy(),
-                "Band-Aid should be exempted from basic tax");
+        assertEquals(0, basicTaxService.getItemTaxValue(gauze),
+            "Medical Products should be exempted from basic tax!");
+        assertEquals(0, basicTaxService.getItemTaxValue(aspirin),
+            "Medical Products be exempted from basic tax!");
+        assertEquals(0, basicTaxService.getItemTaxValue(bandAid),
+            "Medical Products should be exempted from basic tax!");
     }
 }
