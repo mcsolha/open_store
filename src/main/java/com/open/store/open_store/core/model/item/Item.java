@@ -8,9 +8,8 @@ import com.open.store.open_store.core.model.tax.BasicTaxPolicy;
  */
 public class Item extends AbstractItem {
 
-    public Item(String name, BasicTaxPolicy basicTaxPolicy,
-            boolean imported, double shelfPrice) {
-        super(name, basicTaxPolicy, imported, shelfPrice);
+    public Item(String name, boolean imported, double shelfPrice) {
+        super(name, BasicTaxPolicy.LIABLE, imported, shelfPrice);
     }
 
 }

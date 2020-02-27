@@ -1,8 +1,6 @@
 package com.open.store.open_store.core.model.item;
 
-import com.open.store.open_store.core.model.tax.BasicTax;
 import com.open.store.open_store.core.model.tax.BasicTaxPolicy;
-import com.open.store.open_store.core.model.tax.ImportDuty;
 
 /**
  * Abstract class that represents what any type of product
@@ -48,6 +46,7 @@ public abstract class AbstractItem {
 
     public AbstractItem(final String name, final BasicTaxPolicy basicTaxPolicy) {
         this.name = name;
+        this.basicTaxPolicy = basicTaxPolicy;
     }
 
     public AbstractItem(final String name, final BasicTaxPolicy basicTaxPolicy,
